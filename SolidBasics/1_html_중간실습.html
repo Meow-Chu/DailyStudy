@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모두의 HTML/CSS</title>
+</head>
+
+<body>
+    <header>
+        <h1>모두의 HTML/CSS</h1>
+        <nav>
+            <ul>
+                <li><a href="">HOME</a>></li>
+                <li><a href="">HTML</a></li>
+                <li><a href="">CSS</a></li>
+                <li><a href="">JavaScript</a></li>
+            </ul>
+        </nav>
+        <!-- label은 input의 이름표, 브라우저상에 보이지 않더라도 접근성 부분을 위해서 작성해야 함. css로 label을 숨기되 스크린리더같은 소프트웨어로 읽어내도록 추가 처리해야함. input의 id와 label의 for로 연결해줌 -->
+        <label for="inp-search">검색어 입력</label>
+        <input type="search" id="inp-search">
+        <!-- button은 서버로 검색어를 전송해주기 때문에 submit 타입이 적절한데, button의 기본타입이 submit이므로 생략가능 -->
+        <button>검색어 찾기</button>
+    </header>
+
+    <main>
+        <section>
+            <img src="" alt="인사하는 위니브 사자">
+            <!-- section의 제목은 기획자나 디자이너의 의도를 파악하여 작성 -->
+            <h2>모두의 HTML/CSS</h2>
+            <strong>HELLO WORLD! </strong>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure laudantium voluptatem corrupti eveniet
+                harum odit assumenda, doloremque delectus vero, consectetur soluta quidem aperiam praesentium quasi qui
+                nobis at animi ullam.</p>
+            <button type="button">회원가입</button>
+            <button type="button">로그인</button>
+            <aside>
+                <a href="">강의보러가기</a>
+                <a href="">30분 요약강좌 보러가기</a>
+            </aside>
+        </section>
+
+        <section>
+            <h2>웹언어와 즐거운 회사생활</h2>
+            <dl>
+                <dt>HTML</dt>
+                <dd>설명1</dd>
+                <dd>설명2</dd>
+                <dt>CSS</dt>
+                <dd>설명1</dd>
+                <dd>설명2</dd>
+                <dt>JavaScript</dt>
+                <dd>설명1</dd>
+                <dd>설명2</dd>
+            </dl>
+            <figure>
+                <img src="" alt="땀흘리며 운동하는 미어켓 뮤라">
+                <figcaption>
+                    <time datetime="05:00">오전5:00</time>
+                    <strong>헛둘셋넷 열심히 운동하기</strong>
+                    <p>Lorem ipsum dolor sit amet </p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="">
+                <figcaption>
+                    <time datetime="09:00">오전9:00</time>
+                    <strong></strong>
+                    <p>Lorem ipsum dolor sit amet </p>
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="" alt="">
+                <figcaption>
+                    <time datetime="18:00">오후6:00</time>
+                    <strong>치킨과 함께하는 씐나는 퇴근</strong>
+                    <p>Lorem ipsum dolor sit amet </p>
+                </figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>Lorem ipsum dolor</h2>
+            <ul>
+                <li><button type="button">Tab1</button></li>
+                <li><button type="button">Tab2</button></li>
+                <li><button type="button">Tab3</button></li>
+            </ul>
+            <section>
+                <h3>Tab1 데이터 목록</h3>
+                <ol>
+                    <li>
+                        <a href="">
+                            <span>10</span>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                            <time datetime="2022-01-01">2022.01.01</time>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span>9</span>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                            <time datetime="2022-01-01">2022.01.01</time>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span>8</span>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                            <time>2022.01.01</time>
+                        </a>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <h3>Tab2 데이터 목록</h3>
+                <!-- ol태그 복붙 -->
+            </section>
+            <section>
+                <h3>Tab3 데이터 목록</h3>
+                <!-- ol태그 복붙 -->
+            </section>
+            <a href="">more</a>
+        </section>
+    </main>
+
+    <footer>
+        <address>
+            <a href="mailto:test@weniv.com">test@weniv.com</a>
+            <a href="tel:+82064777777">(064)777-7777</a>
+            제주도 제주시 수목원길 39-1, 1층
+        </address>
+        <small>Copyright Weniv Corp. All rights reserved. 2022</small>
+    </footer>
+</body>
+
+</html>
