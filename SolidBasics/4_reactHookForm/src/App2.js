@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
   Link,
-  useLocation,
   useParams,
 } from "react-router-dom";
 
