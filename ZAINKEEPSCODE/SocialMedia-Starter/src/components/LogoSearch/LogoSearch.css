@@ -1,0 +1,41 @@
+.LogoSearch {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.Search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: var(--inputColor);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.Search > input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.s-icon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background: var(--buttonBg);
+  border-radius: 5px;
+  padding: 4px;
+  color: white;
+}
+
+.s-icon:hover {
+  cursor: pointer;
+}
