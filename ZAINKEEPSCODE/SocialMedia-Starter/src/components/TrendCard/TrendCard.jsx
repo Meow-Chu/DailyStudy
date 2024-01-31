@@ -15,8 +15,6 @@ function TrendCard() {
           </div>
         );
       })}
-
-      <button className="button r-button">Share</button>
     </div>
   );
 }

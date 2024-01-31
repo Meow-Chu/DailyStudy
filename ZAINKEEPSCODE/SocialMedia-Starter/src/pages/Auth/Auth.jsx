@@ -13,7 +13,45 @@ function Auth() {
         </div>
       </div>
 
-      <SignUp />
+      <LogIn />
+    </div>
+  );
+}
+
+function LogIn() {
+  return (
+    <div className="a-right">
+      <form className="infoForm authForm">
+        <h3>Log In</h3>
+
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            name="username"
+            placeholder="Username"
+          />
+        </div>
+
+        <div>
+          <input
+            type="text"
+            className="infoInput"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+
+        <div>
+          <span style={{ fontSize: "12px" }}>
+            Don't have an account Sign up
+          </span>
+
+          <button className="button infoButton" type="submit">
+            Log In
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
