@@ -48,7 +48,7 @@ function LogIn() {
           </span>
 
           <button className="button infoButton" type="submit">
-            Log In
+            Login
           </button>
         </div>
       </form>
@@ -61,6 +61,7 @@ function SignUp() {
     <div className="a-right">
       <form className="infoForm authForm">
         <h3>Sign up</h3>
+
         <div>
           <input
             type="text"
@@ -81,7 +82,7 @@ function SignUp() {
             type="text"
             className="infoInput"
             name="username"
-            placeholder="Username"
+            placeholder="Usernames"
           />
         </div>
 
