@@ -54,3 +54,14 @@
   padding-right: 20px;
   font-style: 12px;
 }
+
+.previewImage {
+  position: relative;
+}
+
+.previewImage > svg {
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  cursor: pointer;
+}
