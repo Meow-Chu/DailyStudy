@@ -40,6 +40,8 @@ export const updateUser = async (req, res) => {
     } catch (error) {
       res.status(500).json(error);
     }
+  } else {
+    res.status(403).json("Access Denied! you can only update your own profile");
   }
 };
 
