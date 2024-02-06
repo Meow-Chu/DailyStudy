@@ -20,6 +20,23 @@ export const getUser = async (req, res) => {
   }
 };
 
+// update a user
+export const updateUser = async (req, res) => {
+  const id = req.params.id;
+  const { currentUserId, currentUserAdminStatus, password } = req.body;
+
+  if (id === currentUserId || currentUserAdminStatus) {
+    try {
+      const user = await UserModel.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+};
+
 /* (1) 
 기존코드로 Get요청을 통해 user정보를 응답받았을 때의 문제는 passowrd 정보도 같이 넘어왔다는 것이다. 우리는 관리자 외의 사람들이 password정보를 공유하는 걸 원치 않을 것이다. res받기 전에 아래코드를 추가하고
  const { password, ...otherDetails } = user._doc; 
