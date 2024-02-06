@@ -61,6 +61,31 @@ export const deleteUser = async (req, res) => {
   }
 };
 
+// Follow a User
+export const followUser = async (req, res) => {
+  const id = req.params.id;
+
+  const { currentUserId, currentUserAdminStatus } = req.body;
+  if (currentUserId === id) {
+    res.status(403).json("Action forbidden"); //(3)
+  } else {
+    try {
+      const followUser = await UserModel.findById(id);
+      const followingUser = await UserModel.findById(currentUserId);
+
+      if (!followUser.followers.includes(currentUserId)) {
+        await followUser.updateOne({ $push: { followers: currentUserId } });
+        await followingUser.updateOne({ $push: { following: id } });
+        res.status(200).json("User followed");
+      } else {
+        res.status(403).json("User is already followed by you");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+};
+
 /* (1) 
 기존코드로 Get요청을 통해 user정보를 응답받았을 때의 문제는 passowrd 정보도 같이 넘어왔다는 것이다. 우리는 관리자 외의 사람들이 password정보를 공유하는 걸 원치 않을 것이다. res받기 전에 아래코드를 추가하고
  const { password, ...otherDetails } = user._doc; 
@@ -74,4 +99,6 @@ export const deleteUser = async (req, res) => {
  findByIdAndUpdate: 주어진 ID로 문서를 찾아 업데이트합니다.
  findByIdAndDelete: 주어진 ID로 문서를 찾아 삭제합니다.
  
+ (3)
+ 본인 스스로를 follow할 수 없도록
  */
