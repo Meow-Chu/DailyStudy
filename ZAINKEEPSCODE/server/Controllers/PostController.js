@@ -109,9 +109,13 @@ export const getTimeLinePosts = async (req, res) => {
       },
     ]);
 
-    res
-      .status(200)
-      .json(currentUserPosts.concat(...followingPosts[0].followingPosts)); //(7)
+    res.status(200).json(
+      currentUserPosts
+        .concat(...followingPosts[0].followingPosts)
+        .sort((a, b) => {
+          return b.createdAt - a.createdAt;
+        })
+    ); //(7)
   } catch (error) {
     res.status(500).json(error);
   }
@@ -166,15 +170,20 @@ export const getTimeLinePosts = async (req, res) => {
   }
 ]
 
-① followingPosts라는 이름의 배열을 모두 spread 한다 :  res
+① followingPosts라는 이름의 배열을 모두 spread 한다 :
+  res
       .status(200)
       .json(currentUserPosts.concat(...followingPosts))
 res ▶ 이전과 동일
-② 첫번째 속성만 추출한다 : res
+
+② 첫번째 속성만 추출한다 :
+ res
       .status(200)
       .json(currentUserPosts.concat(...followingPosts[0]))
 res ▶ {}
-③ 0번째 인덱스의 followingPosts필드만 추출한다 :    res
+
+③ 0번째 인덱스의 followingPosts필드만 추출한다 :
+    res
       .status(200)
       .json(currentUserPosts.concat(...followingPosts[0].followingPosts));
 
@@ -205,6 +214,46 @@ res ▶ {}
     "likes": [],
     "createdAt": "2024-02-10T08:29:47.461Z",
     "updatedAt": "2024-02-10T08:29:47.461Z",
+    "__v": 0
+  }
+]
+
+④ 가장 최근에 생성된 글들이 맨 위로 올라 가게 한다 : 
+res.status(200).json(
+      currentUserPosts
+        .concat(...followingPosts[0].followingPosts)
+        .sort((a, b) => {
+          return b.createdAt - a.createdAt;
+        })
+    );
+
+res ▶
+[
+  {
+    "_id": "65c733fbac93f6cc7e6f7f26",
+    "userId": "65c7322cac93f6cc7e6f7f12",
+    "desc": "I am 3 here",
+    "likes": [],
+    "createdAt": "2024-02-10T08:29:47.461Z",
+    "updatedAt": "2024-02-10T08:29:47.461Z",
+    "__v": 0
+  },
+  {
+    "_id": "65c733f4ac93f6cc7e6f7f24",
+    "userId": "65c73227ac93f6cc7e6f7f10",
+    "desc": "I am 2 here",
+    "likes": [],
+    "createdAt": "2024-02-10T08:29:40.629Z",
+    "updatedAt": "2024-02-10T08:29:40.629Z",
+    "__v": 0
+  },
+  {
+    "_id": "65c733eeac93f6cc7e6f7f22",
+    "userId": "65c731a8ac93f6cc7e6f7f07",
+    "desc": "I am 1 here",
+    "likes": [],
+    "createdAt": "2024-02-10T08:29:34.166Z",
+    "updatedAt": "2024-02-10T08:29:34.166Z",
     "__v": 0
   }
 ]
