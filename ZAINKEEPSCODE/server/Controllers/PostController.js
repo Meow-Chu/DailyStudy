@@ -109,7 +109,9 @@ export const getTimeLinePosts = async (req, res) => {
       },
     ]);
 
-    res.status(200).json(currentUserPosts.concat(followingPosts));
+    res
+      .status(200)
+      .json(currentUserPosts.concat(...followingPosts[0].followingPosts)); //(7)
   } catch (error) {
     res.status(500).json(error);
   }
@@ -126,6 +128,85 @@ export const getTimeLinePosts = async (req, res) => {
  * (5) $lookup은 MongoDB의 aggregation frameworkd에서 제공하는 연산자 중 하나이다. 다른 컬렉션에서 데이터를 가져와 현재 컬렉션의 문서와 조인할 수 있게 해준다. 옵션의 의미 ① from : 데이터를 가져 올 컬렉션명, ② localField : 현재 컬렉션(aggregate를 호출한 컬렉션)에서 데이터를 가져올 필드명, ③ foreignField : localField와 조인할 컬렉션 필드로 from컬렉션에서 참조할 필드명 ④ as : 결과를 저장할 새로운 필드명. 
  * 이 코드에서는 'posts'컬렉션에서 데이터를 가져오고, posts컬렉션의 필드 중 following필드를 기준으로 (현재 사용자가 팔로우하는 사용자들의 ID가 following필드에 저장되어있기 때문) 데이터를 가져온다. 팔로우하는 사용자의ID가 userId필드에 저장되어있으므로 posts컬렉션에서는 userId의 필드를 참조할 것이다. 결국, URL에서 추출한 userId와 userId가 팔로우하는 userId의 포스트들은 followingPosts라는 새로운 필드에 조인된 결과가 저장된다.
  * (6) $project: aggregation pipeline에서 결과를 가공하는 데 사용되는 연산자로 결과를 가공하여 특정 필드를 포함하거나 제외할 수 있다.  1은 "포함"을 의미하고, 0은 "제외"를 의미하는데 이 코드에서는 followingPosts 필드는 결과에 포함시키고, _Id는 포함시키지 않는다. 
+ * (7) res.status(200).json(currentUserPosts.concat(followingPosts)); 이 코드조각을 사용해서 Get통신을 했을 때의 응답은 아래와 같았다. 
+ * [
+  {
+    "_id": "65c733eeac93f6cc7e6f7f22",
+    "userId": "65c731a8ac93f6cc7e6f7f07",
+    "desc": "I am 1 here",
+    "likes": [],
+    "createdAt": "2024-02-10T08:29:34.166Z",
+    "updatedAt": "2024-02-10T08:29:34.166Z",
+    "__v": 0
+  },   
+  URL로 추출한 userId의 post는 배열에 정보가 담겨있다
+  userId가 팔로우하는 포스트들은 followingPosts라는 이름으로 배열에 정보가 담겨있다. 
+  이는 매우 복잡한 포맷이므로 간단하게 바꿔보겠다
+  {
+    "followingPosts": [
+      {
+        "_id": "65c733f4ac93f6cc7e6f7f24",
+        "userId": "65c73227ac93f6cc7e6f7f10",
+        "desc": "I am 2 here",
+        "likes": [],
+        "createdAt": "2024-02-10T08:29:40.629Z",
+        "updatedAt": "2024-02-10T08:29:40.629Z",
+        "__v": 0
+      },   
+      {
+        "_id": "65c733fbac93f6cc7e6f7f26",
+        "userId": "65c7322cac93f6cc7e6f7f12",
+        "desc": "I am 3 here",
+        "likes": [],
+        "createdAt": "2024-02-10T08:29:47.461Z",
+        "updatedAt": "2024-02-10T08:29:47.461Z",
+        "__v": 0
+      }
+    ]
+  }
+]
 
+① followingPosts라는 이름의 배열을 모두 spread 한다 :  res
+      .status(200)
+      .json(currentUserPosts.concat(...followingPosts))
+res ▶ 이전과 동일
+② 첫번째 속성만 추출한다 : res
+      .status(200)
+      .json(currentUserPosts.concat(...followingPosts[0]))
+res ▶ {}
+③ 0번째 인덱스의 followingPosts필드만 추출한다 :    res
+      .status(200)
+      .json(currentUserPosts.concat(...followingPosts[0].followingPosts));
+
+      res ▶ userId의 포스트와 userId가 following하는 포스트를 응답받을 수 있음
+      [
+  {
+    "_id": "65c733eeac93f6cc7e6f7f22",
+    "userId": "65c731a8ac93f6cc7e6f7f07",
+    "desc": "I am 1 here",
+    "likes": [],
+    "createdAt": "2024-02-10T08:29:34.166Z",
+    "updatedAt": "2024-02-10T08:29:34.166Z",
+    "__v": 0
+  },
+  {
+    "_id": "65c733f4ac93f6cc7e6f7f24",
+    "userId": "65c73227ac93f6cc7e6f7f10",
+    "desc": "I am 2 here",
+    "likes": [],
+    "createdAt": "2024-02-10T08:29:40.629Z",
+    "updatedAt": "2024-02-10T08:29:40.629Z",
+    "__v": 0
+  },
+  {
+    "_id": "65c733fbac93f6cc7e6f7f26",
+    "userId": "65c7322cac93f6cc7e6f7f12",
+    "desc": "I am 3 here",
+    "likes": [],
+    "createdAt": "2024-02-10T08:29:47.461Z",
+    "updatedAt": "2024-02-10T08:29:47.461Z",
+    "__v": 0
+  }
+]
 
  */
