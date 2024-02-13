@@ -20,20 +20,22 @@ function Auth() {
         <form className="infoForm authForm">
           <h3>{isSignUp ? "Sign up" : "Login in"}</h3>
 
-          <div>
-            <input
-              type="text"
-              placeholder="First Name"
-              className="infoInput"
-              name="firstname"
-            />
-            <input
-              type="text"
-              placeholder="Last Name"
-              className="infoInput"
-              name="lastname"
-            />
-          </div>
+          {isSignUp && (
+            <div>
+              <input
+                type="text"
+                placeholder="First Name"
+                className="infoInput"
+                name="firstname"
+              />
+              <input
+                type="text"
+                placeholder="Last Name"
+                className="infoInput"
+                name="lastname"
+              />
+            </div>
+          )}
 
           <div>
             <input
