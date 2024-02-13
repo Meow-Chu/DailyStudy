@@ -18,7 +18,7 @@ function Auth() {
       {/* Right Side */}
       <div className="a-right">
         <form className="infoForm authForm">
-          <h3>{isSignUp ? "Sign up" : "Login in"}</h3>
+          <h3>{isSignUp ? "Sign up" : "Log in"}</h3>
 
           {isSignUp && (
             <div>
