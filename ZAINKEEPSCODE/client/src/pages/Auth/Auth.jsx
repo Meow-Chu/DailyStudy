@@ -3,7 +3,7 @@ import "./Auth.css";
 import Logo from "../../img/logo.png";
 
 function Auth() {
-  const { isSignUp, setIsSignUp } = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   return (
     <div className="Auth">
       {/* Left Side */}
@@ -53,7 +53,6 @@ function Auth() {
               name="password"
               placeholder="Password"
             />
-
             {isSignUp && (
               <input
                 type="text"
@@ -65,12 +64,17 @@ function Auth() {
           </div>
 
           <div>
-            <span style={{ fontSize: "12px" }}>
-              Already have an account. Login!
+            <span
+              style={{ fontSize: "12px", cursor: "pointer" }}
+              onClick={() => setIsSignUp((prev) => !prev)}
+            >
+              {isSignUp
+                ? "Already have an account. Log In!"
+                : "Don't have an account? Sign Up!"}
             </span>
           </div>
           <button className="button infoButton" type="submit">
-            Signup
+            {isSignUp ? "Sign Up" : "Log In"}
           </button>
         </form>
       </div>
