@@ -54,12 +54,14 @@ function Auth() {
               placeholder="Password"
             />
 
-            <input
-              type="text"
-              className="infoInput"
-              name="confirmpass"
-              placeholder="Confirm password"
-            />
+            {isSignUp && (
+              <input
+                type="text"
+                className="infoInput"
+                name="confirmpass"
+                placeholder="Confirm password"
+              />
+            )}
           </div>
 
           <div>
