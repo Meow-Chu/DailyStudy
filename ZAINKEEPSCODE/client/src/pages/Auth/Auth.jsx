@@ -3,7 +3,7 @@ import "./Auth.css";
 import Logo from "../../img/logo.png";
 
 function Auth() {
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
   const [data, setData] = useState({
     firstname: "",
     lastname: "",
@@ -12,6 +12,7 @@ function Auth() {
     username: "",
   });
 
+  const [confirmPass, setConfirmPass] = useState(false);
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -80,6 +81,17 @@ function Auth() {
             )}
           </div>
 
+          <span
+            style={{
+              display: confirmPass ? "none" : "block",
+              color: "red",
+              fontSize: "12px",
+              alignSelf: "flex-end",
+              marginRight: "5px",
+            }}
+          >
+            * Confirm Password is not same
+          </span>
           <div>
             <span
               style={{ fontSize: "12px", cursor: "pointer" }}
