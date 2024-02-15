@@ -4,6 +4,18 @@ import Logo from "../../img/logo.png";
 
 function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [data, setData] = useState({
+    firstname: "",
+    lastname: "",
+    password: "",
+    confirmpass: "",
+    username: "",
+  });
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="Auth">
       {/* Left Side */}
@@ -27,12 +39,14 @@ function Auth() {
                 placeholder="First Name"
                 className="infoInput"
                 name="firstname"
+                onChange={handleChange}
               />
               <input
                 type="text"
                 placeholder="Last Name"
                 className="infoInput"
                 name="lastname"
+                onChange={handleChange}
               />
             </div>
           )}
@@ -43,22 +57,25 @@ function Auth() {
               className="infoInput"
               name="username"
               placeholder="Usernames"
+              onChange={handleChange}
             />
           </div>
 
           <div>
             <input
-              type="text"
+              type="password"
               className="infoInput"
               name="password"
               placeholder="Password"
+              onChange={handleChange}
             />
             {isSignUp && (
               <input
-                type="text"
+                type="password"
                 className="infoInput"
                 name="confirmpass"
                 placeholder="Confirm password"
+                onChange={handleChange}
               />
             )}
           </div>
