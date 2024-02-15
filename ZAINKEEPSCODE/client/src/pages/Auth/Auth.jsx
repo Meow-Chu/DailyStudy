@@ -12,9 +12,30 @@ function Auth() {
     username: "",
   });
 
-  const [confirmPass, setConfirmPass] = useState(false);
+  const [confirmPass, setConfirmPass] = useState(true);
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignUp) {
+      if (data.password !== data.confirmpass) {
+        setConfirmPass(false);
+      }
+    }
+  };
+
+  const resetForm = () => {
+    setConfirmPass(true);
+    setData({
+      firstname: "",
+      lastname: "",
+      password: "",
+      confirmpass: "",
+      username: "",
+    });
   };
 
   return (
@@ -30,7 +51,7 @@ function Auth() {
 
       {/* Right Side */}
       <div className="a-right">
-        <form className="infoForm authForm">
+        <form className="infoForm authForm" onSubmit={handleSubmit}>
           <h3>{isSignUp ? "Sign up" : "Log in"}</h3>
 
           {isSignUp && (
@@ -41,6 +62,7 @@ function Auth() {
                 className="infoInput"
                 name="firstname"
                 onChange={handleChange}
+                value={data.firstname}
               />
               <input
                 type="text"
@@ -48,6 +70,7 @@ function Auth() {
                 className="infoInput"
                 name="lastname"
                 onChange={handleChange}
+                value={data.lastname}
               />
             </div>
           )}
@@ -59,6 +82,7 @@ function Auth() {
               name="username"
               placeholder="Usernames"
               onChange={handleChange}
+              value={data.username}
             />
           </div>
 
@@ -69,6 +93,7 @@ function Auth() {
               name="password"
               placeholder="Password"
               onChange={handleChange}
+              value={data.password}
             />
             {isSignUp && (
               <input
@@ -77,6 +102,7 @@ function Auth() {
                 name="confirmpass"
                 placeholder="Confirm password"
                 onChange={handleChange}
+                value={data.confirmpass}
               />
             )}
           </div>
@@ -95,7 +121,10 @@ function Auth() {
           <div>
             <span
               style={{ fontSize: "12px", cursor: "pointer" }}
-              onClick={() => setIsSignUp((prev) => !prev)}
+              onClick={() => {
+                setIsSignUp((prev) => !prev);
+                resetForm();
+              }}
             >
               {isSignUp
                 ? "Already have an account. Log In!"
